@@ -1,0 +1,5 @@
+1> Make it print text with printf("string with %s\n","Other Strings");
+2> Make an IDT
+3> Setup keyboardcontroller
+4> Setup system that can read HDD, filesystem: fat32 (most simple filesystem for hdd)
+5> Setup multitasking
