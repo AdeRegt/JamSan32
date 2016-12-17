@@ -91,6 +91,14 @@ void kernel_main(){
     filesystems[0].exists               = TRUE;
     filesystems[0].readDIR              = (unsigned long)&readSFSRootDir;
     filesystems[0].readFile             = (unsigned long)&readSFSFile;
+    printf("The following devices are there:\n");
+    int i = 0;
+    for(i = 0 ; i < 5 ; i++){
+        if(filesystems[i].exists){
+            printf("-Driver %c\n",filesystems[i].driveletter);
+        }
+    }
+    printf("End of devices dump\n");
     fopen("C@opteas721112");
     hang();
 }
@@ -301,8 +309,6 @@ struct idt_ptr {
     unsigned int base;
 } __attribute__((packed));
 
-
-
 struct idt_entry idt[IDT_SIZE];
 struct idt_ptr idtp;
 
@@ -332,7 +338,7 @@ void lidt() {
     //for(i = 30 ; i < 33 ; i++){//35
     //setInterrupt(32, (unsigned long) &irq_timer);
     //}
-    setInterrupt(46, (unsigned long) &irq_hdd);
+    setInterrupt(32+14, (unsigned long) &irq_hdd);
     idtp.limit = (sizeof (struct idt_entry) * IDT_SIZE) - 1;
     idtp.base = (unsigned int) &idt;
     asm volatile("lidt idtp\nsti");
